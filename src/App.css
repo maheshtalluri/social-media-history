@@ -80,3 +80,10 @@ body {
   border-width: 0px;
   cursor: pointer;
 }
+
+.history {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

@@ -88,6 +88,7 @@ class App extends Component {
   }
 
   onDeleteButton = id => {
+    console.log(id)
     const {historyList} = this.state
     const filterData = historyList.filter(eachList => eachList.id !== id)
 
@@ -121,35 +122,39 @@ class App extends Component {
             />
           </div>
         </div>
-        <div className="bottom-section">
-          <ul className="list-container">
-            {searchResults.map(eachList => (
-              <li className="list-item" key={eachList.id}>
-                <div className="logo-section">
-                  <p>{eachList.timeAccessed}</p>
-                  <img
-                    src={eachList.logoUrl}
-                    alt="domain logo"
-                    className="logo-size"
-                  />
-                  <p className="title">{eachList.title}</p>
-                  <p>{eachList.domainUrl}</p>
-                </div>
-                <button
-                  type="button"
-                  className="button"
-                  onClick={this.onDeleteButton}
-                  testid="delete"
-                >
-                  <img
-                    src="https://assets.ccbp.in/frontend/react-js/delete-img.png"
-                    alt="delete"
-                  />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {searchResults.length > 0 ? (
+          <div className="bottom-section">
+            <ul className="list-container">
+              {searchResults.map(eachList => (
+                <li className="list-item" key={eachList.id}>
+                  <div className="logo-section">
+                    <p>{eachList.timeAccessed}</p>
+                    <img
+                      src={eachList.logoUrl}
+                      alt="domain logo"
+                      className="logo-size"
+                    />
+                    <p className="title">{eachList.title}</p>
+                    <p>{eachList.domainUrl}</p>
+                  </div>
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={() => this.onDeleteButton(eachList.id)}
+                    testid="delete"
+                  >
+                    <img
+                      src="https://assets.ccbp.in/frontend/react-js/delete-img.png"
+                      alt="delete"
+                    />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p className="history">There is no history to show</p>
+        )}
       </div>
     )
   }
